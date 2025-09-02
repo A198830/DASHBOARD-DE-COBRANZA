@@ -1,1 +1,27 @@
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class DashboardUI extends Application {
+    @Override
+    public void start(Stage stage) {
+        TableView<CobranzaModel> tabla = new TableView<>();
+        // Configurar columnas y cargar datos
+        List<CobranzaModel> datos = ExcelReader.leerCobranza("cobranza.xlsx");
+        tabla.getItems().addAll(datos);
+
+        VBox root = new VBox(tabla);
+        Scene scene = new Scene(root, 800, 600);
+        stage.setScene(scene);
+        stage.setTitle("Dashboard de Cobranzas");
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
